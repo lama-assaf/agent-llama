@@ -1,6 +1,6 @@
 /**
  * Agent Llama - Modern chat interface for Claude Agent SDK
- * Copyright (C) 2025 KenKai
+ * Copyright (C) 2025 Safastak
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  *
@@ -24,26 +24,27 @@ import * as fs from 'fs';
 
 /**
  * Get the default working directory for agent operations
- * Cross-platform: ~/Documents/agent-girl (Mac/Linux) or C:\Users\{user}\Documents\agent-girl (Windows)
+ * Cross-platform: ~/Documents/agent-llama (Mac/Linux) or C:\Users\{user}\Documents\agent-llama (Windows)
  * Falls back to accessible alternatives if Documents folder is restricted
  */
 export function getDefaultWorkingDirectory(): string {
   const homeDir = os.homedir();
-  const documentsDir = path.join(homeDir, 'Documents', 'agent-girl');
+  const documentsDir = path.join(homeDir, 'Documents', 'agent-llama');
   
   // Check if Documents directory is accessible
   try {
     fs.accessSync(path.join(homeDir, 'Documents'), fs.constants.R_OK | fs.constants.W_OK);
     return documentsDir;
-  } catch (error) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_error) {
     // Documents folder is not accessible (likely due to macOS privacy permissions)
     console.warn('⚠️  Documents folder not accessible, using alternative directory');
     
     // Try alternative locations in order of preference
     const alternatives = [
-      path.join(homeDir, 'agent-girl'), // Direct in home directory
-      path.join(homeDir, 'Desktop', 'agent-girl'), // Desktop folder
-      path.join('/tmp', 'agent-girl'), // Temporary directory
+      path.join(homeDir, 'agent-llama'), // Direct in home directory
+      path.join(homeDir, 'Desktop', 'agent-llama'), // Desktop folder
+      path.join('/tmp', 'agent-llama'), // Temporary directory
     ];
     
     for (const altDir of alternatives) {
@@ -66,26 +67,27 @@ export function getDefaultWorkingDirectory(): string {
 
 /**
  * Get the app data directory for storing database and app files
- * Cross-platform: ~/Documents/agent-girl-app
+ * Cross-platform: ~/Documents/agent-llama-app
  * Falls back to accessible alternatives if Documents folder is restricted
  */
 export function getAppDataDirectory(): string {
   const homeDir = os.homedir();
-  const documentsAppDir = path.join(homeDir, 'Documents', 'agent-girl-app');
+  const documentsAppDir = path.join(homeDir, 'Documents', 'agent-llama-app');
   
   // Check if Documents directory is accessible
   try {
     fs.accessSync(path.join(homeDir, 'Documents'), fs.constants.R_OK | fs.constants.W_OK);
     return documentsAppDir;
-  } catch (error) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_error) {
     // Documents folder is not accessible, use alternative
     console.warn('⚠️  Documents folder not accessible for app data, using alternative');
     
     // Try alternative locations
     const alternatives = [
-      path.join(homeDir, '.agent-girl'), // Hidden directory in home
-      path.join(homeDir, 'agent-girl-app'), // Direct in home directory
-      path.join('/tmp', 'agent-girl-app'), // Temporary directory
+      path.join(homeDir, '.agent-llama'), // Hidden directory in home
+      path.join(homeDir, 'agent-llama-app'), // Direct in home directory
+      path.join('/tmp', 'agent-llama-app'), // Temporary directory
     ];
     
     for (const altDir of alternatives) {
@@ -324,9 +326,9 @@ export function getDirectoryAccessGuidance(): {
     
     // Suggest alternative directories
     const alternatives = [
-      path.join(homeDir, 'agent-girl'),
-      path.join(homeDir, 'Desktop', 'agent-girl'),
-      path.join('/tmp', 'agent-girl'),
+      path.join(homeDir, 'agent-llama'),
+      path.join(homeDir, 'Desktop', 'agent-llama'),
+      path.join('/tmp', 'agent-llama'),
       process.cwd()
     ];
     

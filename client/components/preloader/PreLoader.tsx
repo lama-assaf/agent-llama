@@ -1,6 +1,6 @@
 /**
  * Agent Llama - Modern chat interface for Claude Agent SDK
- * Copyright (C) 2025 KenKai
+ * Copyright (C) 2025 Safastak
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  *
@@ -64,7 +64,7 @@ export function PreLoader({ onComplete, duration = 2000 }: PreLoaderProps) {
     >
       <div className="preloader-content" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
         <img
-          src="/client/agent-boy.svg"
+          src="/client/agent-lam.svg"
           alt="Agent Llama"
           className="preloader-icon"
           style={{ width: '48px', height: '48px', objectFit: 'contain' }}

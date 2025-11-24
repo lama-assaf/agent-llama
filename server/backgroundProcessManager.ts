@@ -33,7 +33,7 @@ export class BackgroundProcessManager {
 
     // Use nohup to fully detach and redirect output to log file
     // This prevents SIGPIPE when parent closes pipes
-    const logFile = `/tmp/agent-girl-${bashId}.log`;
+    const logFile = `/tmp/agent-llama-${bashId}.log`;
     const wrappedCommand = `nohup sh -c '${command.replace(/'/g, "'\"'\"'")}' > ${logFile} 2>&1 & echo $!`;
 
     const subprocess = Bun.spawn(['sh', '-c', wrappedCommand], {

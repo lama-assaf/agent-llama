@@ -95,7 +95,7 @@ Agent Llama is a **desktop-first chat interface** that brings the power of Anthr
 **Works on macOS, Linux, and Windows (Git Bash/WSL):**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/KenKaiii/agent-girl/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Safastakii/agent-llama/master/install.sh | bash
 ```
 
 **What it does:**
@@ -116,7 +116,7 @@ curl -fsSL https://raw.githubusercontent.com/KenKaiii/agent-girl/master/install.
 **For native Windows PowerShell:**
 
 ```powershell
-iwr -useb https://raw.githubusercontent.com/KenKaiii/agent-girl/master/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/Safastakii/agent-llama/master/install.ps1 | iex
 ```
 
 Provides better Windows integration with automatic PATH setup.
@@ -124,13 +124,13 @@ Provides better Windows integration with automatic PATH setup.
 ### Manual Download
 
 **macOS:**
-- [Apple Silicon (M1/M2/M3/M4)](https://github.com/KenKaiii/agent-girl/releases/latest/download/agent-girl-macos-arm64.zip)
-- [Intel (x86_64)](https://github.com/KenKaiii/agent-girl/releases/latest/download/agent-girl-macos-intel.zip)
+- [Apple Silicon (M1/M2/M3/M4)](https://github.com/Safastakii/agent-llama/releases/latest/download/agent-llama-macos-arm64.zip)
+- [Intel (x86_64)](https://github.com/Safastakii/agent-llama/releases/latest/download/agent-llama-macos-intel.zip)
 
 **Windows:**
-- [Windows x64](https://github.com/KenKaiii/agent-girl/releases/latest/download/agent-girl-windows-x64.zip)
+- [Windows x64](https://github.com/Safastakii/agent-llama/releases/latest/download/agent-llama-windows-x64.zip)
 
-**Browse all releases:** [https://github.com/KenKaiii/agent-girl/releases](https://github.com/KenKaiii/agent-girl/releases)
+**Browse all releases:** [https://github.com/Safastakii/agent-llama/releases](https://github.com/Safastakii/agent-llama/releases)
 
 ---
 
@@ -142,10 +142,10 @@ Before first run, add your Anthropic API key:
 
 ```bash
 # macOS/Linux
-nano ~/Applications/agent-girl-app/.env
+nano ~/Applications/agent-llama-app/.env
 
 # Windows
-notepad %USERPROFILE%\Documents\agent-girl-app\.env
+notepad %USERPROFILE%\Documents\agent-llama-app\.env
 ```
 
 Replace `sk-ant-your-key-here` with your actual key from [console.anthropic.com](https://console.anthropic.com/).
@@ -154,15 +154,15 @@ Replace `sk-ant-your-key-here` with your actual key from [console.anthropic.com]
 
 **macOS:**
 ```bash
-agent-girl
+agent-llama
 ```
 
 **Windows:**
-- Double-click `agent-girl.exe` in the install directory
+- Double-click `agent-llama.exe` in the install directory
 
 **From Finder/Explorer:**
 1. Navigate to install directory
-2. Double-click the `agent-girl` executable
+2. Double-click the `agent-llama` executable
 
 The app starts at **http://localhost:3001** and opens automatically in your browser.
 
@@ -220,7 +220,7 @@ Sub-agent activity displays nested under parent tasks for clarity.
 
 Each session has an isolated working directory:
 
-- **Default:** `~/Documents/agent-girl-app/{session-id}/`
+- **Default:** `~/Documents/agent-llama-app/{session-id}/`
 - **Custom:** Choose any directory when creating
 - **Safety:** File operations scoped to this directory only
 
@@ -238,8 +238,8 @@ Each session has an isolated working directory:
 
 ```bash
 # Clone repository
-git clone https://github.com/KenKaiii/agent-girl.git
-cd agent-girl
+git clone https://github.com/Safastakii/agent-llama.git
+cd agent-llama
 
 # Install dependencies
 bun install
@@ -305,7 +305,7 @@ bun test --watch
 ### Project Structure
 
 ```
-agent-girl/
+agent-llama/
 ├── client/                 # React frontend
 │   ├── components/
 │   │   ├── chat/          # ChatContainer, MessageList, ChatInput
@@ -409,7 +409,7 @@ taskkill /PID <PID> /F
 
 ```bash
 # macOS/Linux
-rm -rf ~/Documents/agent-girl-app/
+rm -rf ~/Documents/agent-llama-app/
 
 # Development
 rm -rf data/ && mkdir data
@@ -418,7 +418,7 @@ rm -rf data/ && mkdir data
 ### macOS Security Warnings
 
 **First run:**
-1. Right-click `agent-girl` → **"Open"**
+1. Right-click `agent-llama` → **"Open"**
 2. Click **"Open"** in security dialog
 
 Or via System Preferences:
@@ -469,7 +469,7 @@ See the [LICENSE](LICENSE) file for full terms.
 
 ## 🙏 Credits
 
-**Created by [KenKai](https://github.com/KenKaiii)**
+**Created by [Safastak](https://github.com/Safastakii)**
 
 **Built with:**
 - [Anthropic Claude Agent SDK](https://github.com/anthropics/anthropic-sdk-typescript) - AI capabilities
@@ -487,10 +487,10 @@ See the [LICENSE](LICENSE) file for full terms.
 
 ## 📞 Support
 
-- **GitHub Issues**: [Report bugs](https://github.com/KenKaiii/agent-girl/issues)
-- **GitHub Discussions**: [Ask questions](https://github.com/KenKaiii/agent-girl/discussions)
-- **YouTube**: [@kenkaidoesai](https://www.youtube.com/@kenkaidoesai)
-- **Skool Community**: [skool.com/kenkai](https://www.skool.com/kenkai)
+- **GitHub Issues**: [Report bugs](https://github.com/Safastakii/agent-llama/issues)
+- **GitHub Discussions**: [Ask questions](https://github.com/Safastakii/agent-llama/discussions)
+- **YouTube**: [@Safastakdoesai](https://www.youtube.com/@Safastakdoesai)
+- **Skool Community**: [skool.com/Safastak](https://www.skool.com/Safastak)
 
 ---
 
@@ -498,8 +498,8 @@ See the [LICENSE](LICENSE) file for full terms.
 
 **Built with ❤️ using Claude Agent SDK**
 
-Copyright © 2025 KenKai • Licensed under AGPL-3.0
+Copyright © 2025 Safastak • Licensed under AGPL-3.0
 
-[⬆ Back to Top](#agent-girl)
+[⬆ Back to Top](#agent-llama)
 
 </div>

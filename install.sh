@@ -17,8 +17,8 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Configuration
-REPO="lama-assaf/agent-girl"
-APP_NAME="agent-girl"
+REPO="lama-assaf/agent-llama"
+APP_NAME="agent-llama"
 MIN_DISK_SPACE_MB=100
 
 # Global state for cleanup
@@ -157,22 +157,22 @@ detect_platform() {
     Darwin)
       OS_NAME="macOS"
       OS_PREFIX="macos"
-      INSTALL_DIR="$HOME/Applications/agent-girl-app"
+      INSTALL_DIR="$HOME/Applications/agent-llama-app"
       ;;
     Linux)
       OS_NAME="Linux"
       OS_PREFIX="linux"
-      INSTALL_DIR="$HOME/.local/share/agent-girl-app"
+      INSTALL_DIR="$HOME/.local/share/agent-llama-app"
       ;;
     MINGW*|MSYS*|CYGWIN*)
       OS_NAME="Windows (Git Bash)"
       OS_PREFIX="windows"
       # Properly expand Windows path
       if [[ -n "$LOCALAPPDATA" ]]; then
-        INSTALL_DIR="$LOCALAPPDATA/Programs/agent-girl-app"
+        INSTALL_DIR="$LOCALAPPDATA/Programs/agent-llama-app"
       else
         # Fallback for Git Bash
-        INSTALL_DIR="$USERPROFILE/AppData/Local/Programs/agent-girl-app"
+        INSTALL_DIR="$USERPROFILE/AppData/Local/Programs/agent-llama-app"
       fi
       ;;
     *)
@@ -425,7 +425,7 @@ extract_and_install() {
   # Extract archive
   log_info "Extracting files..."
 
-  # The zip contains a directory named agent-girl-{platform}
+  # The zip contains a directory named agent-llama-{platform}
   EXTRACT_PATH="/tmp/$APP_NAME-$PLATFORM"
   TEMP_FILES+=("$EXTRACT_PATH")
 
@@ -785,7 +785,7 @@ EOF
     log_success "Personalization configured"
     log_info "Your name will appear in the interface as: ${YELLOW}$user_name${NC}"
   else
-    log_info "Skipped personalization (you can run 'agent-girl --setup' later)"
+    log_info "Skipped personalization (you can run 'agent-llama --setup' later)"
   fi
 }
 

@@ -17,7 +17,7 @@ const IS_STANDALONE = process.env.STANDALONE_BUILD === 'true';
 export const debugLog = (message: string): void => {
   if (IS_STANDALONE) {
     try {
-      const logPath = path.join(path.dirname(process.execPath), 'agent-girl-debug.log');
+      const logPath = path.join(path.dirname(process.execPath), 'agent-llama-debug.log');
       const timestamp = new Date().toISOString();
       const logMessage = `[${timestamp}] ${message}\n`;
       appendFileSync(logPath, logMessage, 'utf-8');
@@ -36,8 +36,8 @@ export const debugLog = (message: string): void => {
  * EXPORTED for use in other modules that need to resolve paths relative to the app root
  */
 export const getBinaryDir = (): string => {
-  // import.meta.dir gives us /path/to/agent-girl/server
-  // We need to go up one level to /path/to/agent-girl (the app root)
+  // import.meta.dir gives us /path/to/agent-llama/server
+  // We need to go up one level to /path/to/agent-llama (the app root)
   const serverDir = import.meta.dir;
   const appRoot = path.dirname(serverDir);
   return appRoot;

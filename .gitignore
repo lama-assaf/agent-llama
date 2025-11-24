@@ -6,7 +6,7 @@ dist/
 bun.lock
 data/
 server/generated/
-agent-girl
+agent-llama
 release/
 
 # Ignore all .md files except README, CLAUDE, OAUTH, and command files

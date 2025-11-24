@@ -1,6 +1,6 @@
 /**
  * Agent Llama - Modern chat interface for Claude Agent SDK
- * Copyright (C) 2025 KenKai
+ * Copyright (C) 2025 Safastak
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  *
@@ -190,7 +190,7 @@ export function AboutModal({ onClose }: AboutModalProps) {
             }}
           >
             <a
-              href="https://www.youtube.com/@kenkaidoesai"
+              href="https://www.youtube.com/@Safastakdoesai"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -230,13 +230,13 @@ export function AboutModal({ onClose }: AboutModalProps) {
                     color: 'rgb(var(--text-secondary))',
                   }}
                 >
-                  @kenkaidoesai
+                  @Safastakdoesai
                 </div>
               </div>
             </a>
 
             <a
-              href="https://www.skool.com/kenkai"
+              href="https://www.skool.com/Safastak"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -276,7 +276,7 @@ export function AboutModal({ onClose }: AboutModalProps) {
                     color: 'rgb(var(--text-secondary))',
                   }}
                 >
-                  skool.com/kenkai
+                  skool.com/Safastak
                 </div>
               </div>
             </a>

@@ -1,6 +1,6 @@
 /**
  * Agent Llama - Modern chat interface for Claude Agent SDK
- * Copyright (C) 2025 KenKai
+ * Copyright (C) 2025 Safastak
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  *
@@ -351,7 +351,7 @@ class SessionDatabase {
         finalWorkingDir = expandedPath;
       }
     } else {
-      // Auto-generate chat folder: ~/Documents/agent-girl/chat-{short-id}/
+      // Auto-generate chat folder: ~/Documents/agent-llama/chat-{short-id}/
       finalWorkingDir = this.createChatDirectory(id);
     }
 
@@ -376,7 +376,7 @@ class SessionDatabase {
   }
 
   private createChatDirectory(sessionId: string): string {
-    // Create unique chat folder: ~/Documents/agent-girl/chat-{first-8-chars}/
+    // Create unique chat folder: ~/Documents/agent-llama/chat-{first-8-chars}/
     const shortId = sessionId.substring(0, 8);
     const baseDir = getDefaultWorkingDirectory();
     const chatDir = path.join(baseDir, `chat-${shortId}`);

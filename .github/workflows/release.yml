@@ -43,28 +43,28 @@ jobs:
 
       - name: Setup release directory (source-based)
         run: |
-          mkdir -p release/agent-girl-${{ matrix.platform }}
-          cp -r server release/agent-girl-${{ matrix.platform }}/
-          cp -r client release/agent-girl-${{ matrix.platform }}/
-          cp -r dist release/agent-girl-${{ matrix.platform }}/
-          cp cli.ts release/agent-girl-${{ matrix.platform }}/
-          cp package.json release/agent-girl-${{ matrix.platform }}/
-          cp build-css.ts release/agent-girl-${{ matrix.platform }}/
-          cp bun.lockb release/agent-girl-${{ matrix.platform }}/ 2>/dev/null || true
-          cp LICENSE release/agent-girl-${{ matrix.platform }}/
-          cp credits.mp3 release/agent-girl-${{ matrix.platform }}/ 2>/dev/null || true
-          cp tailwind.config.js release/agent-girl-${{ matrix.platform }}/ 2>/dev/null || true
-          cp postcss.config.mjs release/agent-girl-${{ matrix.platform }}/ 2>/dev/null || true
-          cp tsconfig.json release/agent-girl-${{ matrix.platform }}/ 2>/dev/null || true
+          mkdir -p release/agent-llama-${{ matrix.platform }}
+          cp -r server release/agent-llama-${{ matrix.platform }}/
+          cp -r client release/agent-llama-${{ matrix.platform }}/
+          cp -r dist release/agent-llama-${{ matrix.platform }}/
+          cp cli.ts release/agent-llama-${{ matrix.platform }}/
+          cp package.json release/agent-llama-${{ matrix.platform }}/
+          cp build-css.ts release/agent-llama-${{ matrix.platform }}/
+          cp bun.lockb release/agent-llama-${{ matrix.platform }}/ 2>/dev/null || true
+          cp LICENSE release/agent-llama-${{ matrix.platform }}/
+          cp credits.mp3 release/agent-llama-${{ matrix.platform }}/ 2>/dev/null || true
+          cp tailwind.config.js release/agent-llama-${{ matrix.platform }}/ 2>/dev/null || true
+          cp postcss.config.mjs release/agent-llama-${{ matrix.platform }}/ 2>/dev/null || true
+          cp tsconfig.json release/agent-llama-${{ matrix.platform }}/ 2>/dev/null || true
 
       - name: Install production dependencies
         run: |
-          cd release/agent-girl-${{ matrix.platform }}
+          cd release/agent-llama-${{ matrix.platform }}
           bun install --production
 
       - name: Create launcher script
         run: |
-          cat > release/agent-girl-${{ matrix.platform }}/agent-girl << 'EOF'
+          cat > release/agent-llama-${{ matrix.platform }}/agent-llama << 'EOF'
           #!/bin/bash
           set -e
 
@@ -152,11 +152,11 @@ jobs:
           export STANDALONE_BUILD=true
           exec bun run server/server.ts "$@"
           EOF
-          chmod +x release/agent-girl-${{ matrix.platform }}/agent-girl
+          chmod +x release/agent-llama-${{ matrix.platform }}/agent-llama
 
       - name: Create .env template
         run: |
-          cat > release/agent-girl-${{ matrix.platform }}/.env << 'EOF'
+          cat > release/agent-llama-${{ matrix.platform }}/.env << 'EOF'
           # =============================================================================
           # Anthropic Configuration (Claude Models)
           # =============================================================================
@@ -173,7 +173,7 @@ jobs:
 
       - name: Create README
         run: |
-          cat > release/agent-girl-${{ matrix.platform }}/README.txt << 'EOF'
+          cat > release/agent-llama-${{ matrix.platform }}/README.txt << 'EOF'
           Agent Llama Application - macOS
           ==============================
 
@@ -184,8 +184,8 @@ jobs:
              With: ANTHROPIC_API_KEY=sk-ant-your-actual-key
 
           To Run:
-          - Double-click the 'agent-girl' file
-          - Or run from terminal: ./agent-girl
+          - Double-click the 'agent-llama' file
+          - Or run from terminal: ./agent-llama
           - The app will start at http://localhost:3001
           - Your browser should open automatically
 
@@ -194,7 +194,7 @@ jobs:
           - Subsequent launches are instant
 
           Data Storage:
-          - Sessions stored in ~/Documents/agent-girl/
+          - Sessions stored in ~/Documents/agent-llama/
           - All your conversations are saved locally
 
           Requirements:
@@ -243,15 +243,15 @@ jobs:
           codesign --force --options runtime \
             --sign "$APPLE_SIGNING_IDENTITY" \
             --timestamp \
-            release/agent-girl-${{ matrix.platform }}/agent-girl
+            release/agent-llama-${{ matrix.platform }}/agent-llama
 
           # Verify signature
-          codesign --verify --verbose release/agent-girl-${{ matrix.platform }}/agent-girl
+          codesign --verify --verbose release/agent-llama-${{ matrix.platform }}/agent-llama
 
       - name: Create ZIP archive
         run: |
           cd release
-          zip -r agent-girl-${{ matrix.platform }}.zip agent-girl-${{ matrix.platform }}/
+          zip -r agent-llama-${{ matrix.platform }}.zip agent-llama-${{ matrix.platform }}/
 
       - name: Notarize application
         env:
@@ -260,7 +260,7 @@ jobs:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
           # Submit for notarization
-          xcrun notarytool submit release/agent-girl-${{ matrix.platform }}.zip \
+          xcrun notarytool submit release/agent-llama-${{ matrix.platform }}.zip \
             --apple-id "$APPLE_ID" \
             --password "$APPLE_APP_SPECIFIC_PASSWORD" \
             --team-id "$APPLE_TEAM_ID" \
@@ -272,8 +272,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: agent-girl-${{ matrix.platform }}
-          path: release/agent-girl-${{ matrix.platform }}.zip
+          name: agent-llama-${{ matrix.platform }}
+          path: release/agent-llama-${{ matrix.platform }}.zip
           retention-days: 7
 
   build-windows:
@@ -297,23 +297,23 @@ jobs:
 
       - name: Setup release directory (source-based)
         run: |
-          New-Item -ItemType Directory -Force -Path release\agent-girl-windows-x64
-          Copy-Item -Recurse -Force server release\agent-girl-windows-x64\
-          Copy-Item -Recurse -Force client release\agent-girl-windows-x64\
-          Copy-Item -Recurse -Force dist release\agent-girl-windows-x64\
-          Copy-Item -Force cli.ts release\agent-girl-windows-x64\
-          Copy-Item -Force package.json release\agent-girl-windows-x64\
-          Copy-Item -Force build-css.ts release\agent-girl-windows-x64\
-          if (Test-Path bun.lockb) { Copy-Item -Force bun.lockb release\agent-girl-windows-x64\ }
-          Copy-Item -Force LICENSE release\agent-girl-windows-x64\
-          if (Test-Path credits.mp3) { Copy-Item -Force credits.mp3 release\agent-girl-windows-x64\ }
-          if (Test-Path tailwind.config.js) { Copy-Item -Force tailwind.config.js release\agent-girl-windows-x64\ }
-          if (Test-Path postcss.config.mjs) { Copy-Item -Force postcss.config.mjs release\agent-girl-windows-x64\ }
-          if (Test-Path tsconfig.json) { Copy-Item -Force tsconfig.json release\agent-girl-windows-x64\ }
+          New-Item -ItemType Directory -Force -Path release\agent-llama-windows-x64
+          Copy-Item -Recurse -Force server release\agent-llama-windows-x64\
+          Copy-Item -Recurse -Force client release\agent-llama-windows-x64\
+          Copy-Item -Recurse -Force dist release\agent-llama-windows-x64\
+          Copy-Item -Force cli.ts release\agent-llama-windows-x64\
+          Copy-Item -Force package.json release\agent-llama-windows-x64\
+          Copy-Item -Force build-css.ts release\agent-llama-windows-x64\
+          if (Test-Path bun.lockb) { Copy-Item -Force bun.lockb release\agent-llama-windows-x64\ }
+          Copy-Item -Force LICENSE release\agent-llama-windows-x64\
+          if (Test-Path credits.mp3) { Copy-Item -Force credits.mp3 release\agent-llama-windows-x64\ }
+          if (Test-Path tailwind.config.js) { Copy-Item -Force tailwind.config.js release\agent-llama-windows-x64\ }
+          if (Test-Path postcss.config.mjs) { Copy-Item -Force postcss.config.mjs release\agent-llama-windows-x64\ }
+          if (Test-Path tsconfig.json) { Copy-Item -Force tsconfig.json release\agent-llama-windows-x64\ }
 
       - name: Install production dependencies
         run: |
-          cd release\agent-girl-windows-x64
+          cd release\agent-llama-windows-x64
           bun install --production
 
       - name: Create launcher script
@@ -382,7 +382,7 @@ jobs:
           echo.
           set STANDALONE_BUILD=true
           bun run server\server.ts %*
-          '@ | Out-File -FilePath release\agent-girl-windows-x64\agent-girl.bat -Encoding ASCII
+          '@ | Out-File -FilePath release\agent-llama-windows-x64\agent-llama.bat -Encoding ASCII
 
       - name: Create .env template
         run: |
@@ -399,7 +399,7 @@ jobs:
           # Get your API key from: https://z.ai
           # The server automatically configures the endpoint when you select a GLM model
           ZAI_API_KEY=your-zai-key-here
-          "@ | Out-File -FilePath release\agent-girl-windows-x64\.env -Encoding UTF8
+          "@ | Out-File -FilePath release\agent-llama-windows-x64\.env -Encoding UTF8
 
       - name: Create README
         run: |
@@ -414,8 +414,8 @@ jobs:
              With: ANTHROPIC_API_KEY=sk-ant-your-actual-key
 
           To Run:
-          - Double-click the 'agent-girl.bat' file
-          - Or run from command prompt: agent-girl.bat
+          - Double-click the 'agent-llama.bat' file
+          - Or run from command prompt: agent-llama.bat
           - The app will start at http://localhost:3001
           - Your browser should open automatically
 
@@ -424,7 +424,7 @@ jobs:
           - Subsequent launches are instant
 
           Data Storage:
-          - Sessions stored in %USERPROFILE%\Documents\agent-girl\
+          - Sessions stored in %USERPROFILE%\Documents\agent-llama\
           - All your conversations are saved locally
 
           Requirements:
@@ -438,17 +438,17 @@ jobs:
           - Make sure .env file has your real API key
 
           Enjoy!
-          "@ | Out-File -FilePath release\agent-girl-windows-x64\README.txt -Encoding UTF8
+          "@ | Out-File -FilePath release\agent-llama-windows-x64\README.txt -Encoding UTF8
 
       - name: Create ZIP archive
         run: |
-          Compress-Archive -Path release\agent-girl-windows-x64 -DestinationPath release\agent-girl-windows-x64.zip
+          Compress-Archive -Path release\agent-llama-windows-x64 -DestinationPath release\agent-llama-windows-x64.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: agent-girl-windows-x64
-          path: release/agent-girl-windows-x64.zip
+          name: agent-llama-windows-x64
+          path: release/agent-llama-windows-x64.zip
           retention-days: 7
 
   build-linux:
@@ -472,28 +472,28 @@ jobs:
 
       - name: Setup release directory (source-based)
         run: |
-          mkdir -p release/agent-girl-linux-x64
-          cp -r server release/agent-girl-linux-x64/
-          cp -r client release/agent-girl-linux-x64/
-          cp -r dist release/agent-girl-linux-x64/
-          cp cli.ts release/agent-girl-linux-x64/
-          cp package.json release/agent-girl-linux-x64/
-          cp build-css.ts release/agent-girl-linux-x64/
-          cp bun.lockb release/agent-girl-linux-x64/ 2>/dev/null || true
-          cp LICENSE release/agent-girl-linux-x64/
-          cp credits.mp3 release/agent-girl-linux-x64/ 2>/dev/null || true
-          cp tailwind.config.js release/agent-girl-linux-x64/ 2>/dev/null || true
-          cp postcss.config.mjs release/agent-girl-linux-x64/ 2>/dev/null || true
-          cp tsconfig.json release/agent-girl-linux-x64/ 2>/dev/null || true
+          mkdir -p release/agent-llama-linux-x64
+          cp -r server release/agent-llama-linux-x64/
+          cp -r client release/agent-llama-linux-x64/
+          cp -r dist release/agent-llama-linux-x64/
+          cp cli.ts release/agent-llama-linux-x64/
+          cp package.json release/agent-llama-linux-x64/
+          cp build-css.ts release/agent-llama-linux-x64/
+          cp bun.lockb release/agent-llama-linux-x64/ 2>/dev/null || true
+          cp LICENSE release/agent-llama-linux-x64/
+          cp credits.mp3 release/agent-llama-linux-x64/ 2>/dev/null || true
+          cp tailwind.config.js release/agent-llama-linux-x64/ 2>/dev/null || true
+          cp postcss.config.mjs release/agent-llama-linux-x64/ 2>/dev/null || true
+          cp tsconfig.json release/agent-llama-linux-x64/ 2>/dev/null || true
 
       - name: Install production dependencies
         run: |
-          cd release/agent-girl-linux-x64
+          cd release/agent-llama-linux-x64
           bun install --production
 
       - name: Create launcher script
         run: |
-          cat > release/agent-girl-linux-x64/agent-girl << 'EOF'
+          cat > release/agent-llama-linux-x64/agent-llama << 'EOF'
           #!/bin/bash
           set -e
 
@@ -581,11 +581,11 @@ jobs:
           export STANDALONE_BUILD=true
           exec bun run server/server.ts "$@"
           EOF
-          chmod +x release/agent-girl-linux-x64/agent-girl
+          chmod +x release/agent-llama-linux-x64/agent-llama
 
       - name: Create .env template
         run: |
-          cat > release/agent-girl-linux-x64/.env << 'EOF'
+          cat > release/agent-llama-linux-x64/.env << 'EOF'
           # =============================================================================
           # Anthropic Configuration (Claude Models)
           # =============================================================================
@@ -602,7 +602,7 @@ jobs:
 
       - name: Create README
         run: |
-          cat > release/agent-girl-linux-x64/README.txt << 'EOF'
+          cat > release/agent-llama-linux-x64/README.txt << 'EOF'
           Agent Llama Application - Linux
           ===============================
 
@@ -613,9 +613,9 @@ jobs:
              With: ANTHROPIC_API_KEY=sk-ant-your-actual-key
 
           To Run:
-          - Right-click 'agent-girl' → Properties → Permissions → Check "Allow executing file as program"
-          - Then double-click the 'agent-girl' file
-          - Or run from terminal: ./agent-girl
+          - Right-click 'agent-llama' → Properties → Permissions → Check "Allow executing file as program"
+          - Then double-click the 'agent-llama' file
+          - Or run from terminal: ./agent-llama
           - The app will start at http://localhost:3001
           - Your browser should open automatically
 
@@ -624,7 +624,7 @@ jobs:
           - Subsequent launches are instant
 
           Data Storage:
-          - Sessions stored in ~/Documents/agent-girl/
+          - Sessions stored in ~/Documents/agent-llama/
           - All your conversations are saved locally
 
           Requirements:
@@ -636,7 +636,7 @@ jobs:
 
           Troubleshooting:
           - If port 3001 is busy, kill the process: lsof -ti:3001 | xargs kill -9
-          - If permission denied, run: chmod +x agent-girl
+          - If permission denied, run: chmod +x agent-llama
           - Make sure .env file has your real API key
           - On some distributions, you may need to install curl: sudo apt install curl
 
@@ -646,13 +646,13 @@ jobs:
       - name: Create ZIP archive
         run: |
           cd release
-          zip -r agent-girl-linux-x64.zip agent-girl-linux-x64/
+          zip -r agent-llama-linux-x64.zip agent-llama-linux-x64/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: agent-girl-linux-x64
-          path: release/agent-girl-linux-x64.zip
+          name: agent-llama-linux-x64
+          path: release/agent-llama-linux-x64.zip
           retention-days: 7
 
   create-release:
@@ -689,9 +689,9 @@ jobs:
           prerelease: false
           generate_release_notes: true
           files: |
-            artifacts/agent-girl-macos-arm64/agent-girl-macos-arm64.zip
-            artifacts/agent-girl-macos-intel/agent-girl-macos-intel.zip
-            artifacts/agent-girl-windows-x64/agent-girl-windows-x64.zip
-            artifacts/agent-girl-linux-x64/agent-girl-linux-x64.zip
+            artifacts/agent-llama-macos-arm64/agent-llama-macos-arm64.zip
+            artifacts/agent-llama-macos-intel/agent-llama-macos-intel.zip
+            artifacts/agent-llama-windows-x64/agent-llama-windows-x64.zip
+            artifacts/agent-llama-linux-x64/agent-llama-linux-x64.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

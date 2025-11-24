@@ -1,6 +1,6 @@
 /**
  * Agent Llama - Modern chat interface for Claude Agent SDK
- * Copyright (C) 2025 KenKai
+ * Copyright (C) 2025 Safastak
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  *
@@ -174,9 +174,9 @@ export function useSessionAPI() {
   }, []);
 
   /**
-   * Rename a session folder (and title)
+   * Rename a session title
    */
-  const renameSession = useCallback(async (sessionId: string, newFolderName: string): Promise<{ success: boolean; error?: string }> => {
+  const renameSession = useCallback(async (sessionId: string, newTitle: string): Promise<{ success: boolean; error?: string }> => {
     setIsLoading(true);
     setError(null);
 
@@ -186,7 +186,7 @@ export function useSessionAPI() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ folderName: newFolderName }),
+        body: JSON.stringify({ title: newTitle }),
       });
 
       const result = await response.json() as { success: boolean; error?: string; session?: Session };

@@ -1,6 +1,6 @@
 /**
  * Agent Llama - Modern chat interface for Claude Agent SDK
- * Copyright (C) 2025 KenKai
+ * Copyright (C) 2025 Safastak
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  *
@@ -29,7 +29,7 @@ const App: React.FC = () => {
   // Preload the agent icon to prevent broken image on first render
   useEffect(() => {
     const img = new Image();
-    img.src = '/client/agent-boy.svg';
+    img.src = '/client/agent-lam.svg';
   }, []);
 
   return (

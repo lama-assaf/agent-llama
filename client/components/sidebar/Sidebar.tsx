@@ -1,6 +1,6 @@
 /**
  * Agent Llama - Modern chat interface for Claude Agent SDK
- * Copyright (C) 2025 KenKai
+ * Copyright (C) 2025 Safastak
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  *
@@ -107,31 +107,24 @@ export function Sidebar({ isOpen, onToggle, chats = [], onNewChat, onChatSelect,
 
   const handleRenameSubmit = (chatId: string) => {
     const currentChat = chats.find(c => c.id === chatId);
-    const newName = editingTitle.trim();
+    const newTitle = editingTitle.trim();
 
-    // Validate folder name: max 15 chars, lowercase + dashes + numbers only
-    if (!newName) {
+    // Validate title: max 100 chars, non-empty
+    if (!newTitle) {
       setEditingId(null);
       setEditingTitle('');
       return;
     }
 
-    if (newName.length > 15) {
-      toast.error('Invalid folder name', {
-        description: 'Folder name must be 15 characters or less'
+    if (newTitle.length > 100) {
+      toast.error('Invalid title', {
+        description: 'Title must be 100 characters or less'
       });
       return;
     }
 
-    if (!/^[a-z0-9-]+$/.test(newName)) {
-      toast.error('Invalid folder name', {
-        description: 'Only lowercase letters, numbers, and dashes allowed'
-      });
-      return;
-    }
-
-    if (newName !== currentChat?.title) {
-      onChatRename?.(chatId, newName);
+    if (newTitle !== currentChat?.title) {
+      onChatRename?.(chatId, newTitle);
     }
 
     setEditingId(null);
@@ -178,7 +171,7 @@ export function Sidebar({ isOpen, onToggle, chats = [], onNewChat, onChatSelect,
         {/* Header */}
         <div className="sidebar-header">
           <div className="sidebar-logo">
-            <img src="/client/agent-boy.svg" alt="Agent Llama" className="sidebar-logo-icon" />
+            <img src="/client/agent-lam.svg" alt="Agent Llama" className="sidebar-logo-icon" />
           </div>
           <button className="sidebar-toggle-btn" onClick={onToggle} aria-label="Toggle Sidebar">
             <Menu size={24} opacity={0.8} className={isOpen ? '' : 'rotate-180'} />
@@ -252,11 +245,9 @@ export function Sidebar({ isOpen, onToggle, chats = [], onNewChat, onChatSelect,
                               ref={inputRef}
                               type="text"
                               value={editingTitle}
-                              maxLength={15}
+                              maxLength={100}
                               onChange={(e) => {
-                                // Convert to lowercase and filter out invalid chars
-                                const filtered = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
-                                setEditingTitle(filtered);
+                                setEditingTitle(e.target.value);
                               }}
                               onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
@@ -266,7 +257,7 @@ export function Sidebar({ isOpen, onToggle, chats = [], onNewChat, onChatSelect,
                                 }
                               }}
                               onBlur={() => handleRenameSubmit(chat.id)}
-                              placeholder="folder-name"
+                              placeholder="Chat title"
                               style={{
                                 width: '100%',
                                 padding: '0.5rem',

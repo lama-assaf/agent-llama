@@ -2,7 +2,7 @@
 
 /**
  * Agent Llama - User Setup CLI
- * Copyright (C) 2025 KenKai
+ * Copyright (C) 2025 Safastak
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
@@ -98,7 +98,7 @@ export async function runSetup() {
   console.log(colorize(`  Display Name: ${getUserDisplayName({ firstName, lastName })}`, 'blue'));
   console.log('');
   console.log(colorize('You can run this setup again anytime with:', 'yellow'));
-  console.log(colorize('  agent-girl --setup', 'cyan'));
+  console.log(colorize('  agent-llama --setup', 'cyan'));
   console.log(colorize('  bun run setup', 'cyan'));
   console.log('');
 }

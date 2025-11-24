@@ -23,7 +23,7 @@ echo "📦 Platform: $PLATFORM"
 
 # Clean and create release directory
 rm -rf release
-mkdir -p release/agent-girl-$PLATFORM
+mkdir -p release/agent-llama-$PLATFORM
 
 # Build client bundle
 echo "🏗️  Building client..."
@@ -31,26 +31,26 @@ bun run build
 
 # Copy source files
 echo "📂 Copying source files..."
-cp -r server release/agent-girl-$PLATFORM/
-cp -r client release/agent-girl-$PLATFORM/
-cp -r dist release/agent-girl-$PLATFORM/
-cp cli.ts release/agent-girl-$PLATFORM/
-cp package.json release/agent-girl-$PLATFORM/
-cp bun.lockb release/agent-girl-$PLATFORM/ 2>/dev/null || true
-cp LICENSE release/agent-girl-$PLATFORM/
-cp credits.mp3 release/agent-girl-$PLATFORM/ 2>/dev/null || true
-cp tailwind.config.js release/agent-girl-$PLATFORM/ 2>/dev/null || true
-cp postcss.config.mjs release/agent-girl-$PLATFORM/ 2>/dev/null || true
-cp tsconfig.json release/agent-girl-$PLATFORM/ 2>/dev/null || true
+cp -r server release/agent-llama-$PLATFORM/
+cp -r client release/agent-llama-$PLATFORM/
+cp -r dist release/agent-llama-$PLATFORM/
+cp cli.ts release/agent-llama-$PLATFORM/
+cp package.json release/agent-llama-$PLATFORM/
+cp bun.lockb release/agent-llama-$PLATFORM/ 2>/dev/null || true
+cp LICENSE release/agent-llama-$PLATFORM/
+cp credits.mp3 release/agent-llama-$PLATFORM/ 2>/dev/null || true
+cp tailwind.config.js release/agent-llama-$PLATFORM/ 2>/dev/null || true
+cp postcss.config.mjs release/agent-llama-$PLATFORM/ 2>/dev/null || true
+cp tsconfig.json release/agent-llama-$PLATFORM/ 2>/dev/null || true
 
 # Install dependencies
 echo "📦 Installing dependencies..."
-cd release/agent-girl-$PLATFORM
+cd release/agent-llama-$PLATFORM
 bun install --production
 cd ../..
 
 # Create .env template
-cat > release/agent-girl-$PLATFORM/.env << 'EOF'
+cat > release/agent-llama-$PLATFORM/.env << 'EOF'
 # =============================================================================
 # Anthropic Configuration (Claude Models)
 # =============================================================================
@@ -66,7 +66,7 @@ ZAI_API_KEY=your-zai-key-here
 EOF
 
 # Create launcher script
-cat > release/agent-girl-$PLATFORM/agent-girl << 'EOF'
+cat > release/agent-llama-$PLATFORM/agent-llama << 'EOF'
 #!/bin/bash
 set -e
 
@@ -154,17 +154,17 @@ echo
 exec bun run server/server.ts "$@"
 EOF
 
-chmod +x release/agent-girl-$PLATFORM/agent-girl
+chmod +x release/agent-llama-$PLATFORM/agent-llama
 
 # Create README
-cat > release/agent-girl-$PLATFORM/README.txt << 'EOF'
+cat > release/agent-llama-$PLATFORM/README.txt << 'EOF'
 Agent Llama Application - macOS
 ==============================
 
 Authentication Setup (Choose ONE):
 
 OPTION 1: Claude Pro/Max Subscription (Recommended - $0 API costs)
-1. Run: agent-girl --login
+1. Run: agent-llama --login
 2. Your browser will open for authentication
 3. Copy the authorization code and paste it in terminal
 4. Done! Your subscription will be used instead of API credits
@@ -176,23 +176,23 @@ OPTION 2: API Key
    With: ANTHROPIC_API_KEY=sk-ant-your-actual-key
 
 To Run:
-- Run from terminal: agent-girl
-- Or double-click the 'agent-girl' file
+- Run from terminal: agent-llama
+- Or double-click the 'agent-llama' file
 - The app will start at http://localhost:3001
 - Your browser should open automatically
 
 OAuth Commands:
-- agent-girl --login      # Login with Claude Pro/Max
-- agent-girl --logout     # Logout from OAuth
-- agent-girl --status     # Check authentication status
+- agent-llama --login      # Login with Claude Pro/Max
+- agent-llama --logout     # Logout from OAuth
+- agent-llama --status     # Check authentication status
 
 First Run:
 - On first launch, Bun runtime will be auto-installed (takes ~5 seconds)
 - Subsequent launches are instant
 
 Data Storage:
-- Sessions stored in ~/Documents/agent-girl-app/
-- OAuth tokens stored in ~/.agent-girl/ (secure)
+- Sessions stored in ~/Documents/agent-llama-app/
+- OAuth tokens stored in ~/.agent-llama/ (secure)
 - All your conversations are saved locally
 
 Requirements:
@@ -203,17 +203,17 @@ Requirements:
 Troubleshooting:
 - If port 3001 is busy, kill the process: lsof -ti:3001 | xargs kill -9
 - If OAuth login fails, use API key method instead
-- Check auth status: agent-girl --status
+- Check auth status: agent-llama --status
 
 Enjoy!
 EOF
 
 # Create zip
 cd release
-zip -r agent-girl-$PLATFORM.zip agent-girl-$PLATFORM/
+zip -r agent-llama-$PLATFORM.zip agent-llama-$PLATFORM/
 cd ..
 
 echo
 echo "✅ Build complete!"
-echo "📦 Package: release/agent-girl-$PLATFORM.zip"
-echo "📁 Size: $(du -sh release/agent-girl-$PLATFORM.zip | cut -f1)"
+echo "📦 Package: release/agent-llama-$PLATFORM.zip"
+echo "📁 Size: $(du -sh release/agent-llama-$PLATFORM.zip | cut -f1)"

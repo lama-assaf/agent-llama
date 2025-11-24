@@ -18,7 +18,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "author": "KenKai",
+  "author": "Safastak",
   "license": "AGPL-3.0-or-later",
   "description": "Clean chat UI for Claude Agent SDK",
   "dependencies": {

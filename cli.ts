@@ -144,7 +144,7 @@ Examples:
   bun run cli.ts --status
 
 Note: This CLI is for OAuth authentication only.
-      Use 'agent-girl' command to launch the app (standalone binary).
+      Use 'agent-llama' command to launch the app (standalone binary).
 `);
 }
 

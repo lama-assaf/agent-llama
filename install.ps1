@@ -1,7 +1,7 @@
 # =============================================================================
 # Agent Llama Windows Installer - Production Grade
 # =============================================================================
-# Run with: iwr -useb https://raw.githubusercontent.com/KenKaiii/agent-girl/master/install.ps1 | iex
+# Run with: iwr -useb https://raw.githubusercontent.com/Safastakii/agent-llama/master/install.ps1 | iex
 #
 # Handles all edge cases, validates dependencies, verifies downloads,
 # and provides comprehensive error handling with rollback support.
@@ -10,10 +10,10 @@
 $ErrorActionPreference = "Stop"
 
 # Configuration
-$REPO = "KenKaiii/agent-girl"
-$APP_NAME = "agent-girl"
+$REPO = "Safastakii/agent-llama"
+$APP_NAME = "agent-llama"
 $MIN_DISK_SPACE_GB = 0.1
-$INSTALL_DIR = "$env:LOCALAPPDATA\Programs\agent-girl-app"
+$INSTALL_DIR = "$env:LOCALAPPDATA\Programs\agent-llama-app"
 
 # Global state for cleanup
 $script:TempFiles = @()
@@ -385,7 +385,7 @@ function Install-Application {
     # Extract archive
     Write-Info "Extracting files..."
 
-    # The zip contains a directory named agent-girl-{platform}
+    # The zip contains a directory named agent-llama-{platform}
     $extractPath = "$env:TEMP\$APP_NAME-$script:Platform"
     $script:TempFiles += $extractPath
 
@@ -612,7 +612,7 @@ function Set-Personalization {
         Write-Success "Personalization configured"
         Write-Info "Your name will appear in the interface as: $userName"
     } else {
-        Write-Info "Skipped personalization (you can run 'agent-girl --setup' later)"
+        Write-Info "Skipped personalization (you can run 'agent-llama --setup' later)"
     }
 }
 

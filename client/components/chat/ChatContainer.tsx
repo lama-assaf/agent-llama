@@ -1170,11 +1170,9 @@ export function ChatContainer() {
         isOpen={isSidebarOpen}
         onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
         chats={sessions.map(session => {
-          // Extract folder name from working_directory path
-          const folderName = session.working_directory?.split('/').filter(Boolean).pop() || session.title;
           return {
             id: session.id,
-            title: folderName,
+            title: session.title,
             timestamp: new Date(session.updated_at),
             isActive: session.id === currentSessionId,
             isLoading: loadingSessions.has(session.id),
